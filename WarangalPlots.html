@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GHRUHA.com - Warangal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0f766e, #1e3a8a);
+            min-height: 100vh;
+            padding-top: 4rem;
+        }
+
+        .navbar {
+            background: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #1e3a8a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: #1e3a8a;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: #f3f4f6;
+            color: #1e3a8a;
+        }
+
+        .login-link {
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s;
+        }
+
+        .login-link:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .location-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .location-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .location-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .location-tab.active {
+            background: white;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .header {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1e3a8a;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .property-content {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .property-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .property-details {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .price {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .amenities {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .amenity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4b5563;
+        }
+
+        .nearby {
+            color: #6b7280;
+            margin: 1rem 0;
+            line-height: 1.5;
+        }
+
+        .owner-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .owner-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .owner-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #7c3aed;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .contact-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+
+        .contact-btn:hover {
+            background: #059669;
+        }
+
+        .posted-time {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .location-content {
+            display: none;
+        }
+
+        .location-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .property-content {
+                flex-direction: column;
+            }
+
+            .property-image {
+                width: 100%;
+                height: 250px;
+            }
+
+            .owner-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar .container {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                text-align: center;
+            }
+
+            .login-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            body {
+                padding-top: 6rem;
+            }
+        }
+        .plot-details {
+            display: flex;
+            gap: 1rem;
+            margin: 0.5rem 0;
+        }
+        
+        .plot-feature {
+            background: #f3f4f6;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            color: #4b5563;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-text">GHRUHA.COM</span>
+            </a>
+            <div class="nav-buttons">
+                <a href="saved.html" class="nav-link">Saved</a>
+                <a href="post.html" class="nav-link">Post Property</a>
+                <a href="Login.html" class="nav-link login-link">
+                    <span>👤</span> Login/Register
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="location-tabs">
+            <button class="location-tab active" data-location="bangalore">Warangal</button>
+        </div>
+
+        <div id="bangalore" class="location-content active">
+            <div class="header">
+                <h1>Plots in Warangal</h1>
+                <p>Showing 1-30 of 45 properties</p>
+            </div>
+            <div id="bangaloreProperties"></div>
+        </div>
+    </main>
+
+    <script>
+        const propertiesData = {
+            bangalore: [
+                {
+                    id: 1,
+                    price: "45,00,000",
+                    type: "Residential Plot",
+                    location: "Kashi bugga",
+                    area: "1200 sq.ft",
+                    dimensions: "40 x 30 ft",
+                    facing: "East",
+                    owner: "Priya Reddy",
+                    postedDays: 5,
+                    nearbyPlaces: ["Tech Park", "Metro Station"],
+                    approvals: ["BMRDA Approved", "Clear Title"],
+                    image: "data:image/jpeg;base64,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"
+                },
+                {
+                    id: 2,
+                    price: "65,00,000",
+                    type: "Commercial Plot",
+                    location: "Kila warangal",
+                    area: "2400 sq.ft",
+                    dimensions: "60 x 40 ft",
+                    facing: "North",
+                    owner: "Suresh Kumar",
+                    postedDays: 2,
+                    nearbyPlaces: ["Ring Road", "IT Hub"],
+                    approvals: ["BBMP Approved", "Conversion Done"],
+                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUIJpFYtotEmeWxFt7ZByNN75g1Q0tXZyA-g&s"
+                },
+                {
+                    id: 3,
+                    price: "35,00,000",
+                    type: "Residential Plot",
+                    location: "New shampet",
+                    area: "1000 sq.ft",
+                    dimensions: "40 x 25 ft",
+                    facing: "West",
+                    owner: "Ravi Shankar",
+                    postedDays: 4,
+                    nearbyPlaces: ["Railway Station", "Schools"],
+                    approvals: ["BDA Approved"],
+                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3AC8HVWmjBI_umppWdf-E-42ZfsU9RE9c9A&s"
+                },
+                {
+                    id: 4,
+                    price: "85,00,000",
+                    type: "Commercial Plot",
+                    location: "Chworstha",
+                    area: "3000 sq.ft",
+                    dimensions: "75 x 40 ft",
+                    facing: "North",
+                    owner: "Anjali Singh",
+                    postedDays: 1,
+                    nearbyPlaces: ["Airport Road", "Business Park"],
+                    approvals: ["BBMP Approved", "Commercial Zone"],
+                    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpAXx7o4J2tIzJIqvzAfh2KZYZrG61anV_-g&s"
+                }
+            ]
+        };
+
+        function createPropertyCard(property) {
+            return `
+                <article class="property-card" data-property-id="${property.id}">
+                    <div class="property-content">
+                        <img src="${property.image}" alt="${property.type}" class="property-image">
+                        <div class="property-details">
+                            <div class="property-header">
+                                <div>
+                                    <div class="price">₹${property.price}</div>
+                                    <div>${property.type} in ${property.location}</div>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="icon-btn" aria-label="Save property">❤️</button>
+                                </div>
+                            </div>
+                            <div class="plot-details">
+                                <span class="plot-feature">📐 ${property.area}</span>
+                                <span class="plot-feature">📏 ${property.dimensions}</span>
+                                <span class="plot-feature">🧭 ${property.facing} Facing</span>
+                            </div>
+                            <div class="plot-details">
+                                ${property.approvals.map(approval => 
+                                    `<span class="plot-feature">✅ ${approval}</span>`
+                                ).join('')}
+                            </div>
+                            <div class="nearby">Nearby: ${property.nearbyPlaces.join(" • ")}</div>
+                            <div class="owner-section">
+                                <div class="owner-info">
+                                    <div class="owner-avatar" aria-label="Owner avatar">${property.owner[0]}</div>
+                                    <div>
+                                        <div>${property.owner}</div>
+                                        <div class="posted-time">Posted ${property.postedDays} days ago</div>
+                                    </div>
+                                </div>
+                                <button class="contact-btn">Contact Owner</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderProperties() {
+            Object.keys(propertiesData).forEach(location => {
+                const container = document.getElementById(`${location}Properties`);
+                if (container) {
+                    container.innerHTML = propertiesData[location]
+                        .map(createPropertyCard)
+                        .join('');
+                }
+            });
+        }
+
+        function initializeTabs() {
+            const tabs = document.querySelectorAll('.location-tab');
+            const contents = document.querySelectorAll('.location-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const location = tab.dataset.location;
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    contents.forEach(c => c.classList.remove('active'));
+                    document.getElementById(location)?.classList.add('active');
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProperties();
+            initializeTabs();
+        });
+    </script>
+</body>
+</html>

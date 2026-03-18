@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing.com - Rentals in Warangal</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #0f766e, #1e3a8a);
+            min-height: 100vh;
+            padding-top: 4rem;
+        }
+
+        .navbar {
+            background: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #1e3a8a;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 1.25rem;
+            color: #1e3a8a;
+           
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: #f3f4f6;
+            color: #1e3a8a;
+        }
+
+        .login-link {
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s;
+        }
+
+        .login-link:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .location-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .location-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .location-tab:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .location-tab.active {
+            background: white;
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .header {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1e3a8a;
+        }
+
+        .header p {
+            color: #6b7280;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .property-content {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .property-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .property-details {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .price {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .amenities {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .amenity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4b5563;
+        }
+
+        .nearby {
+            color: #6b7280;
+            margin: 1rem 0;
+            line-height: 1.5;
+        }
+
+        .owner-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .owner-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .owner-avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: #7c3aed;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .contact-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+
+        .contact-btn:hover {
+            background: #059669;
+        }
+
+        .posted-time {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .location-content {
+            display: none;
+        }
+
+        .location-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .property-content {
+                flex-direction: column;
+            }
+
+            .property-image {
+                width: 100%;
+                height: 250px;
+            }
+
+            .owner-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar .container {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-link {
+                text-align: center;
+            }
+
+            .login-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            body {
+                padding-top: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                
+                <span class="logo-text">GHRUHA.COM</span>
+            </a>
+            <div class="nav-buttons">
+                <a href="saved.html" class="nav-link"> Saved </a>
+                <a href="post.html" class="nav-link"> Post Property </a>
+                <a href="Login.html" class="nav-link login-link">
+                    <span>👤</span> Login/Register
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="location-tabs">
+            <button class="location-tab active" data-location="warangal">Warangal</button>
+            <button class="location-tab" data-location="kuCross">KU Cross</button>
+            <button class="location-tab" data-location="Naimnagar">Naimnagar</button>
+        </div>
+
+        <div id="warangal" class="location-content active">
+            <div class="header">
+                <h1>Flats for Rent in Warangal</h1>
+                <p>Showing 1-30 of 45 properties</p>
+            </div>
+            <div id="warangalProperties"></div>
+        </div>
+
+        <div id="kuCross" class="location-content">
+            <div class="header">
+                <h1>Flats for Rent in KU Cross</h1>
+                <p>Showing 1-20 of 25 properties</p>
+            </div>
+            <div id="kuCrossProperties"></div>
+        </div>
+
+        <div id="Naimnagar" class="location-content">
+            <div class="header">
+                <h1>Flats for Rent in Naimnagar</h1>
+                <p>Showing 1-20 of 48 properties</p>
+            </div>
+            <div id="NaimnagarProperties"></div>
+        </div>
+    </main>
+
+    <script>
+        const propertiesData = {
+            warangal: [
+            {
+                    id: 1,
+                    price: "12,000",
+                    type: "3 BHK House",
+                    location: "Warangal",
+                    furnishing: "Semi-furnished",
+                    area: "750 sq.ft",
+                    bathrooms: "3",
+                    owner: "Priya Reddy",
+                    postedDays: 5,
+                    nearbyPlaces: ["Railway Station", "Public Park"],
+                    image: 'https://housing-images.n7net.in/01c16c28/05949825855afdcac7ea6e90827e5950/v0/fs/4_bhk_independent_house-for-rent-yadagirigutta_1-Hyderabad-others.jpg'
+                },
+                {
+                    id: 2,
+                    price: "15,000",
+                    type: "3 BHK Apartment",
+                    location: "Warangal Central",
+                    furnishing: "Fully-furnished",
+                    area: "1000 sq.ft",
+                    bathrooms: "3",
+                    owner: "Suresh Kumar",
+                    postedDays: 2,
+                    nearbyPlaces: ["City Mall", "Hospital"],
+                    image: 'https://www.housefind.in/wp-content/uploads/2020/07/WhatsApp-Image-2020-07-05-at-21.26.43-1.jpeg'
+                },
+                {
+                    id: 3,
+                    price: "10,000",
+                    type: "2 BHK Flat",
+                    location: "Hanamkonda",
+                    furnishing: "Unfurnished",
+                    area: "650 sq.ft",
+                    bathrooms: "2",
+                    owner: "Ravi Shankar",
+                    postedDays: 4,
+                    nearbyPlaces: ["Supermarket", "College"],
+                    image: 'data:image/jpeg;base64,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'
+                },
+                {
+                    id: 4,
+                    price: "18,000",
+                    type: "4 BHK Duplex",
+                    location: "Warangal North",
+                    furnishing: "Semi-furnished",
+                    area: "1200 sq.ft",
+                    bathrooms: "4",
+                    owner: "Anjali Singh",
+                    postedDays: 1,
+                    nearbyPlaces: ["Highway", "School"],
+                    image: 'https://imagecdn.99acres.com/media1/25608/8/512168265M-1731723006924.webp'
+                }
+            ],
+            kuCross: [
+                {
+                    id: 1,
+                    price: "8,000",
+                    type: "2 BHK Flat",
+                    location: "Ku-cross",
+                    furnishing: "Unfurnished",
+                    area: "600 sq.ft",
+                    bathrooms: "2",
+                    owner: "Ram Kumar",
+                    postedDays: 3,
+                    nearbyPlaces: ["Bus Stop", "Market"],
+                    image :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTveE3TejTArZ0P4aP_9mX0fdL_-k5qspXGmQ&s'
+                },
+                {
+                    id: 2,
+                    price: "10,500",
+                    type: "2 BHK Apartment",
+                    location: "Ku-cross Main",
+                    furnishing: "Semi-furnished",
+                    area: "700 sq.ft",
+                    bathrooms: "2",
+                    owner: "Lakshmi Devi",
+                    postedDays: 1,
+                    nearbyPlaces: ["School", "Shopping Complex"],
+                    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXBp8KiR5TUGchwXOvqEwxLISuckSgvztTRw&s'
+                },
+                {
+                    id: 3,
+                    price: "7,500",
+                    type: "1 BHK Flat",
+                    location: "Ku-cross East",
+                    furnishing: "Unfurnished",
+                    area: "450 sq.ft",
+                    bathrooms: "1",
+                    owner: "Prakash Yadav",
+                    postedDays: 6,
+                    nearbyPlaces: ["Temple", "Pharmacy"],
+                    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUiuvZffgnsgWXQlui0lDZt0C5kFGWEF01cg&s'
+                },
+            ],
+            Naimnagar: [
+                {
+                    id: 1,
+                    price: "8,500",
+                    type: "2 BHK Flat",
+                    location: "Naimnagar",
+                    furnishing: "Unfurnished",
+                    area: "450 sq.ft",
+                    bathrooms: "2",
+                    owner: "Ravi Kumar",
+                    postedDays: 2,
+                    nearbyPlaces: ["Central Mall", "City Hospital"],
+                    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3D_ieQ63aVS0GNie5_rVnYeE6E74Mqdc6QQ&s'
+                },
+                {
+                    id: 2,
+                    price: "12,000",
+                    type: "3 BHK House",
+                    location: "Naimnagar Main Road",
+                    furnishing: "Semi-furnished",
+                    area: "750 sq.ft",
+                    bathrooms: "3",
+                    owner: "Priya Reddy",
+                    postedDays: 5,
+                    nearbyPlaces: ["Railway Station", "Public Park"],
+                    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPx6HZ_t7xGbsNCIbwghmYO1wY-NuD4J6Mrw&s'
+                },
+                {
+                    id: 3,
+                    price: "9,500",
+                    type: "2 BHK Flat",
+                    location: "Naimnagar West",
+                    furnishing: "Fully-furnished",
+                    area: "650 sq.ft",
+                    bathrooms: "2",
+                    owner: "Ramesh Verma",
+                    postedDays: 3,
+                    nearbyPlaces: ["Market", "Stadium"],
+                    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLl-CR1XmQ4eTRG0my3SSlOwfNDW880mtv4A&s'
+                },
+                {
+                    id: 4,
+                    price: "14,000",
+                    type: "3 BHK Duplex",
+                    location: "Naimnagar Heights",
+                    furnishing: "Semi-furnished",
+                    area: "1000 sq.ft",
+                    bathrooms: "3",
+                    owner: "Suman Sharma",
+                    postedDays: 1,
+                    nearbyPlaces: ["Garden", "Metro Station"],
+                    image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa41k2mh3tYS3sazCAYHnw3JBkdhTZdETicA&s'
+                    
+                }
+            ]
+        };
+    
+        function createPropertyCard(property) {
+        return `
+            <article class="property-card" data-property-id="${property.id}">
+                <div class="property-content">
+                    <img src="${property.image || '/api/placeholder/300/200'}" alt="${property.type}" class="property-image">
+                    <div class="property-details">
+                        <div class="property-header">
+                            <div>
+                                <div class="price">₹${property.price}</div>
+                                <div>${property.type} in ${property.location}</div>
+                            </div>
+                            <div class="action-buttons">
+                                <button class="icon-btn" aria-label="Save property">❤️</button>
+                            </div>
+                            </div>
+                            <div class="amenities">
+                                <div class="amenity"> 🏠${property.furnishing}</div>
+                                <div class="amenity">📐 ${property.area}</div>
+                                <div class="amenity"> 🚿 ${property.bathrooms} Bathrooms</div>
+                            </div>
+                            <div class="nearby">Nearby: ${property.nearbyPlaces.join(" • ")}</div>
+                            <div class="owner-section">
+                                <div class="owner-info">
+                                    <div class="owner-avatar" aria-label="Owner avatar">${property.owner[0]}</div>
+                                    <div>
+                                        <div>${property.owner}</div>
+                                        <div class="posted-time">Posted ${property.postedDays} days ago</div>
+                                    </div>
+                                </div>
+                                <button class="contact-btn">Contact Owner</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+    
+        function renderProperties() {
+            Object.keys(propertiesData).forEach(location => {
+                const container = document.getElementById(`${location}Properties`);
+                if (container) {
+                    container.innerHTML = propertiesData[location]
+                        .map(createPropertyCard)
+                        .join('');
+                }
+            });
+        }
+
+        function initializeTabs() {
+            const tabs = document.querySelectorAll('.location-tab');
+            const contents = document.querySelectorAll('.location-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const location = tab.dataset.location;
+                    
+                    // Update tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Update content
+                    contents.forEach(c => c.classList.remove('active'));
+                    document.getElementById(location)?.classList.add('active');
+                });
+            });
+        }
+    
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProperties();
+            initializeTabs();
+        });
+    </script>
+</body>
+</html>
